@@ -1,6 +1,6 @@
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
-    <a href="{{url('dashboard')}}" class="site_title"><i class="fa fa-paw"></i> <span>SIM-ASSET</span></a>
+    <a href="{{url('dashboard')}}" class="site_title"><i class="fa fa-paw"></i> <span>Pelaporan</span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -43,16 +43,9 @@
         @endif
           <li class=""><a><i class="fa fa-envelope"></i>Pesan <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="#">Pengaduan Masyarakat</a></li>
-                <li><a href="#">Pengaduan Pungli</a></li>
-                <li><a href="#">Pengaduan Penanganan Perkara</a></li>
-              </ul>
-          </li>
-          <li class=""><a><i class="fa fa-file-text-o"></i>Laporan <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="#">Pengaduan Masyarakat</a></li>
-                <li><a href="#">Pengaduan Pungli</a></li>
-                <li><a href="#">Pengaduan Penanganan Perkara</a></li>
+                <li><a href="{{route('pengaduan.index',['jenis=Pengaduan Masyarakat'])}}">Pengaduan Masyarakat</a></li>
+                <li><a href="{{route('pengaduan.index',['jenis=Pengaduan Pungli'])}}">Pengaduan Pungli</a></li>
+                <li><a href="{{route('pengaduan.index',['jenis=Pengaduan Penanganan Perkara'])}}">Pengaduan Penanganan Perkara</a></li>
               </ul>
           </li>
           <li class=""><a href="{{ url('My-QrCode') }}"><i class="fa fa-qrcode"></i>My QR-Code</a></li>
