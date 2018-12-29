@@ -17,16 +17,18 @@ class CreatePengaduanMasyarakatsTable extends Migration
             $table->increments('id');
             $table->integer('jenis');
             $table->string('nama');
-            $table->string('email');
             $table->string('telpon');
+            $table->string('email')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('terlapor')->nullable();
+            $table->timestamp('waktu_kejadian');
+            $table->string('tempat_kejadian')->nullable();
+            $table->text('pengaduan');
             $table->string('stpl')->nullable();
             $table->string('polres')->nullable();
             $table->string('polsek')->nullable();
             $table->text('uraian')->nullable();
-            $table->string('alamat');
-            $table->text('pengaduan');
-            $table->text('foto');
-            $table->multipolygon('geom', "GEOMETRY", 0)->nullable();
+            $table->text('foto')->nullable();
             $table->timestamps();
         });
     }

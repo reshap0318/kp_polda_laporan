@@ -41,6 +41,9 @@
             </ul>
           </li>
         @endif
+        @if (Sentinel::getUser()->hasAccess(['user.index','role.index']))
+          <li class=""><a href="{{route('kasus.index')}}"><i class="fa fa-bomb"></i>Kasus</a></li>
+        @endif
           <li class=""><a><i class="fa fa-envelope"></i>Pesan <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{{route('pengaduan.index',['jenis=Pengaduan Masyarakat'])}}">Pengaduan Masyarakat</a></li>

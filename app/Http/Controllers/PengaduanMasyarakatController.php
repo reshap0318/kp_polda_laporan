@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\pengaduan_masyarakat as pengaduan;
 use Illuminate\Http\Request;
+use App\Role;
 
 class PengaduanMasyarakatController extends Controller
 {

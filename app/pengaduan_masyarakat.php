@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 
 class pengaduan_masyarakat extends Model
 {
-  use PostgisTrait;
   protected $table = 'pengaduan_masyarakats';
 
   const CREATED_AT = 'created_at';
@@ -16,40 +14,36 @@ class pengaduan_masyarakat extends Model
   protected $casts = [
      'jenis'    => 'integer',
      'nama'     => 'string',
-     'email'    => 'string',
      'telpon'   => 'string',
+     'email'    => 'string',
+     'alamat'   => 'string',
+     'pengaduan'=> 'string',
+     'waktu_kejadian'=> 'string',
+     'tempat_kejadian'=> 'string',
      'stpl'     => 'string',
      'polres'   => 'string',
      'polsek'   => 'string',
      'uraian'   => 'string',
-     'alamat'   => 'string',
-     'pengaduan'=> 'string',
      'foto'     => 'string',
   ];
 
   protected $fillable = [
     'jenis',
     'nama',
-    'email',
     'telpon',
+    'email',
+    'alamat',
+    'pengaduan',
     'stpl',
     'polres',
     'polsek',
     'uraian',
-    'alamat',
-    'pengaduan',
     'foto',
-    'geom'
   ];
 
-  protected $postgisFields = [
-        'geom'
-    ];
+  public function listkasus($value='')
+  {
+    return $this->belongsToMany(pengaduan_kasus::class, 'id', 'id_pengaduan');
+  }
 
-    protected $postgisTypes = [
-        'geom' => [
-            'geomtype' => 'geometry',
-            'srid' => 0
-        ]
-    ];
 }

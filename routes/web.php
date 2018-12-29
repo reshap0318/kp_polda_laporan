@@ -15,6 +15,10 @@ Auth::routes();
 Route::get('qrLogin', ['uses' => 'QrLoginController@qr1']);
 Route::get('qrLogin2', ['uses' => 'QrLoginController@qr2']);
 Route::post('qrLogin', ['uses' => 'QrLoginController@checkUser']);
+
+Route::get('Pengaduan Masyarakat', function () {
+    return view('backend.pengaduan.umum.branda');
+});
 //image
 Route::get('avatar/{type}/{file_id}','FileController@image');
 
@@ -50,6 +54,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission'] ], function () {
 	Route::post('role/{id}/permission', 'RoleController@simpan')->name('role.simpan');
 
   //pengaduan
-	Route::resource('pengaduan','PengaduanMasyarakatController');
-
+	Route::resource('pengaduan','PengaduanMasyarakatController',['except' => ['show']]);
+  //kasus
+	Route::resource('kasus','KasusController',['except' => ['show']]);
 });

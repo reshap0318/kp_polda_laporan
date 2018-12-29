@@ -84,14 +84,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = user::find($id);
-        $piket = piket::where('user_id',$id)->get();
-        $denda = denda::where('user_id',$id)->get();
-        $asistenacc = denda::where('asisten_acc',$id)->get();
-        $piket_detail = piket_detail::where('piket_id',$id)->get();
-        $izin_piket = izin_piket::where('piket_id',$id)->get();
-        $postingan = postingan::where('user_id',$id)->get();
-        //dd([$piket,$denda,$asistenacc, $piket_detail, $izin_piket]);
-        return view('backend.user.show',compact('user','piket','denda','asistenacc','piket_detail','izin_piket','postingan'));
+        return view('backend.user.show',compact('user'));
     }
 
 
@@ -148,15 +141,7 @@ class UserController extends Controller
     public function showprofil()
     {
         $user = Sentinel::getuser();
-        $id=$user->id;
-        $piket = piket::where('user_id',$id)->get();
-        $denda = denda::where('user_id',$id)->get();
-        $asistenacc = denda::where('asisten_acc',$id)->get();
-        $piket_detail = piket_detail::whereRaw('piket_id in (select id from pikets where user_id = '.$id.')')->get();
-        $izin_piket = izin_piket::whereRaw('piket_id in (select id from pikets where user_id = '.$id.')')->get();
-        $postingan = postingan::where('user_id',$id)->get();
-        //dd([$piket,$denda,$asistenacc, $piket_detail, $izin_piket,$postingan]);
-        return view('backend.user.show',compact('user','piket','denda','asistenacc','piket_detail','izin_piket','postingan'));
+        return view('backend.user.show',compact('user'));
     }
 
     public function gantiprofil(Request $request,$id)
