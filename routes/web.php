@@ -54,7 +54,9 @@ Route::group(['middleware' => ['web', 'auth', 'permission'] ], function () {
 	Route::post('role/{id}/permission', 'RoleController@simpan')->name('role.simpan');
 
   //pengaduan
-	Route::resource('pengaduan','PengaduanMasyarakatController',['except' => ['show']]);
+	Route::resource('pengaduan','PengaduanMasyarakatController',['except' => ['create','store','edit','update','destroy']]);
+  //cetak
+  Route::get('cetak','PengaduanMasyarakatController@cetak');
   //kasus
 	Route::resource('kasus','KasusController',['except' => ['show']]);
 });

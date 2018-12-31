@@ -27,7 +27,6 @@ class CreatePengaduanMasyarakatsTable extends Migration
             $table->string('stpl')->nullable();
             $table->string('polres')->nullable();
             $table->string('polsek')->nullable();
-            $table->text('uraian')->nullable();
             $table->text('foto')->nullable();
             $table->timestamps();
         });

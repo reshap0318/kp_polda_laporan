@@ -21,13 +21,13 @@ class pengaduan_kasus extends Model
     'id_kasus',
   ];
 
-  public function pengaduan($value='')
-  {
-      return $this->belongsToMany(pengaduan_masyarakat::class, 'id_pengaduan', 'id');
-  }
-
-  public function kasus($value='')
-  {
-      return $this->belongsToMany(kasus::class, 'id_kasus', 'id');
-  }
+  // public function pengaduan($value='')
+  // {
+  //     return $this->belongsTo(pengaduan_masyarakat::class);
+  // }
+  //
+  // public function kasus($value='')
+  // {
+  //     return $this->belongsTo(kasus::class);
+  // }
 }

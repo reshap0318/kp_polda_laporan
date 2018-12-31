@@ -23,7 +23,6 @@ class pengaduan_masyarakat extends Model
      'stpl'     => 'string',
      'polres'   => 'string',
      'polsek'   => 'string',
-     'uraian'   => 'string',
      'foto'     => 'string',
   ];
 
@@ -37,13 +36,12 @@ class pengaduan_masyarakat extends Model
     'stpl',
     'polres',
     'polsek',
-    'uraian',
     'foto',
   ];
 
   public function listkasus($value='')
   {
-    return $this->belongsToMany(pengaduan_kasus::class, 'id', 'id_pengaduan');
+    return $this->belongsToMany(kasus::class, 'pengaduan_kasuses', 'id_pengaduan', 'id_kasus');
   }
 
 }

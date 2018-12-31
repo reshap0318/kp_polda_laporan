@@ -23,6 +23,6 @@ class kasus extends Model
 
     public function pengaduan($value='')
     {
-        return $this->belongsToMany(pengaduan_kasus::class, 'id', 'id_kasus');
+        return $this->belongsToMany(pengaduan_masyarakat::class);
     }
 }

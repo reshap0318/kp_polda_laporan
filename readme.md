@@ -13,7 +13,7 @@ Sebelum melakukan instalasi, pastikan composer telah terinstall.
 
 1. Download source code dalam bentuk zip atau menggunakan git
 
-   `git clone https://github.com/reshap0318/SIMASSET.git`
+   `git clone https://github.com/reshap0318/kp_polda_laporan.git`
 
 2. Install php package dengan perintah
 

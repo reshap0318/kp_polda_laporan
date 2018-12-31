@@ -20,7 +20,7 @@
       Pengaduan Penanganan Perkara
     @endif</h2>
     <ul class="nav navbar-right panel_toolbox">
-      <a href="#" class="btn btn-success">Cetak Laporan @if($pp==1)
+      <a data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-success">Cetak Laporan @if($pp==1)
         Pengaduan Masyarakat
         @elseif($pp==2)
         Pengaduan Pungli
@@ -36,6 +36,7 @@
         <tr class="headings">
           <th class="text-center">No</th>
           <th>Nama</th>
+          <th>Perihal</th>
           <th>Pengaduan</th>
           <th class="no-link last"><span class="nobr">Action</span></th>
           <th class="bulk-actions" colspan="7">
@@ -53,21 +54,45 @@
         @foreach($pengaduans as $pengaduan)
               <td class=" text-center">{{ ++$no }}</td>
               <td class=" ">{{$pengaduan->nama}}</td>
-              <td class=" ">{{limit_words($pengaduan->pengaduan,50)}}</td>
+              <td class=" ">
+                @foreach($pengaduan->listkasus as $kasus)
+                  {{$kasus->nama_kasus}},
+                @endforeach
+              </td>
+              <td class=" ">{{limit_words($pengaduan->pengaduan,19)}}</td>
               <td class=" last">
                 @if (Sentinel::getUser()->hasAccess(['pengaduan.edit']))
-                  <a href="{{route('pengaduan.edit', $pengaduan->id)}}" class="btn btn-success btn-xs">edit</a>
-                @endif
-                @if (Sentinel::getUser()->hasAccess(['pengaduan.destroy']))
-                  {!! Form::open(['method'=>'DELETE', 'route' => ['pengaduan.destroy', $pengaduan->id], 'style' => 'display:inline']) !!}
-                  {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs','id'=>'delete-confirm']) !!}
-                  {!! Form::close() !!}
+                  <a href="{{route('pengaduan.show', $pengaduan->id)}}" class="btn btn-success btn-xs">Detail</a>
                 @endif
               </td>
               </tr>
         @endforeach
       </tbody>
     </table>
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <form action="{{url('cetak')}}" method="GET">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="jenis" value="{{$pp}}">
+                dari : <input type="date" name="waktua" value=""><br>
+                sampai : <input type="date" name="waktub" value="">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+
+            </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 @endsection

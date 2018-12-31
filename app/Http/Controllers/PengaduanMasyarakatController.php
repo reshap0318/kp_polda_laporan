@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\pengaduan_masyarakat as pengaduan;
 use Illuminate\Http\Request;
-use App\Role;
 
 class PengaduanMasyarakatController extends Controller
 {
@@ -33,35 +32,31 @@ class PengaduanMasyarakatController extends Controller
 
     }
 
-
-    public function create(Request $request)
+    public function show($id)
     {
-      //
+        $pengaduan = pengaduan::find($id);
+        return view('backend.pengaduan.show',compact('pengaduan'));
     }
 
-
-    public function store(Request $request)
+    public function cetak(Request $request)
     {
-        //
-    }
-
-    public function show(pengaduan_masyarakat $pengaduan_masyarakat)
-    {
-        return view('backend.pengaduan.show',compact('pengaduan_masyarakat'));
-    }
-
-    public function edit(pengaduan_masyarakat $pengaduan_masyarakat)
-    {
-        //
-    }
-
-    public function update(Request $request, pengaduan_masyarakat $pengaduan_masyarakat)
-    {
-        //
-    }
-
-    public function destroy(pengaduan_masyarakat $pengaduan_masyarakat)
-    {
-        //
+      if($request->jenis && $request->waktua && $request->waktub){
+        $pengaduans = null;
+        if($request->jenis=='1'){
+          $pp=1;
+          $pengaduans = pengaduan::whereraw("jenis = 1 AND waktu_kejadian BETWEEN '$request->waktua' AND '$request->waktub'")->get();
+        }elseif($request->jenis=='2'){
+          $pp=2;
+          $pengaduans = pengaduan::whereraw("jenis = 2 AND waktu_kejadian BETWEEN '$request->waktua' AND '$request->waktub'")->get();
+        }elseif($request->jenis=='3'){
+          $pp=3;
+          $pengaduans = pengaduan::whereraw("jenis = 3 AND waktu_kejadian BETWEEN '$request->waktua' AND '$request->waktub'")->get();
+        }else{
+          return view('frontend.404');
+        }
+        return view('backend.pengaduan.cetakall',compact('pengaduans','pp'));
+      }else{
+        return redirect()->back();
+      }
     }
 }
